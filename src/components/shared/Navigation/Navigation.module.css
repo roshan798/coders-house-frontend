@@ -1,0 +1,43 @@
+nav {
+    /* border: 1px solid red; */
+    width: 100vw;
+    height: 70px;
+
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    /* border: 1px solid blue; */
+    padding: 0 1.5rem;
+}
+
+.logoWrapper {
+    /* border: 1px solid green; */
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.emoji {
+    aspect-ratio: 2/3;
+    height: 45px;
+}
+
+.profileContainer {
+    /* border: 1px solid green; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.avatar {
+    aspect-ratio: 1/1;
+    height: 40px;
+    border-radius: 999px;
+}

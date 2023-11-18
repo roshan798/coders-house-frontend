@@ -1,0 +1,35 @@
+.btn {
+    background: var(--primary-button-bg);
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border-radius: 999px;
+    width: fit-content;
+    margin: auto;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out;
+    color: #fff;
+    border: none;
+    letter-spacing: 0.8px;
+    font-size: 1.2rem;
+}
+
+.btn:hover {
+    box-shadow: var(--primary-button-bg) -1px -1px 10px 0px;
+}
+
+.btn .arrowForward {
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    50% {
+        transform: translateX(5px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+}

@@ -1,11 +1,25 @@
 import { Link } from "react-router-dom";
 import logo from "../../../assets/Images/Emoji.png";
 import styles from "./Navigation.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuth } from "../../../store/authSlice.js";
+import { logout } from "../../../http";
 export default function Navigation() {
+    const dispatch = useDispatch();
     const { user } = useSelector((state) => state.authSlice);
     // console.log("inside Navigation.jsx");
     // console.log(user);
+    const logoutUser = async () => {
+        try {
+            const { data } = await logout();
+            // console.log("inside logout");
+            // console.log(data);
+            dispatch(setAuth({data:data}));
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <nav className={styles.navbar}>
             <div className={styles.wrapper}>
@@ -23,6 +37,11 @@ export default function Navigation() {
                     <div className={styles.profileContainer}>
                         {user && (
                             <>
+                                <button
+                                    className={styles.logoutButton}
+                                    onClick={logoutUser}>
+                                    Log out
+                                </button>
                                 <span>{user.name}</span>
                                 <img
                                     src={`${

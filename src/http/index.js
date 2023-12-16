@@ -22,6 +22,9 @@ export const verifyOtp = (data) => {
 export const activate = (data) => {
     return api.post('/api/v1/activate', data);
 }
+export const logout = (data) => {
+    return api.post('/api/v1/logout', data);
+}
 // interceptors
 /*
 Axios interceptors allow us to run our code or modify the request or response before the request is sent or after the response is received. This can be useful for handling global tasks like authentication, logging, error handling, etc., without repeating the same logic in every HTTP request.

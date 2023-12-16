@@ -17,12 +17,17 @@ export const authSlice = createSlice({
         setAuth: (state, action) => {
             // console.log("payload",action.payload.data);
 
-            const {user} = action.payload.data;
+            const { user } = action.payload.data;
             state.user = user;
             //temporary
             // state.user.activated = false;
             //
-            state.isAuth = true;
+            if (user === null) {
+                state.isAuth = false
+            }
+            else {
+                state.isAuth = true;
+            }
 
         },
         setOtp: (state, action) => {

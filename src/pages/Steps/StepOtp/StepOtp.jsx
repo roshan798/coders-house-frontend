@@ -1,44 +1,64 @@
 import styles from "./StepOtp.module.css";
-import lock from "../../../assets/Images/lock.png"
+import lock from "../../../assets/Images/lock.png";
 import Button from "../../../components/shared/CardButton/Button";
 import Card from "../../../components/shared/Card/Card";
-import {useNavigate} from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-export default function stepOtp({ onNext}) {
+import { verifyOtp } from "../../../http/index.js";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setAuth } from "../../../store/authSlice.js";
+
+export default function StepOtp() {
     const navigate = useNavigate();
-    const [otp,setOtp] = useState('');
-    
-    const onChange = (e)=>{
-        setOtp(e.target.value);
-    }
-    return <div className="card-wrapper">
-        
-        <Card
-            title="Enter the OTP we've just texted you"
-            emoji={lock}>
-            <div className={styles.cardContentWrapper}>
-                <div className={styles.inputBox}>
-                    <input
-                        type="text"
-                        className={styles.input}
-                        placeholder="Enter OTP here"
-                        id="otp"
-                        autoComplete="email"
-                        onChange={onChange}
-                        value={otp}
+    const dispatch = useDispatch();
+    const [otp, setOtp] = useState("");
+    const {phone,hash} = useSelector((state)=>{
+        return state.authSlice.otp;
+    });
+    const handleClik = async () => {
+        try {
+            const {data} = await verifyOtp({ otp, phone, hash });
+            
+            dispatch(setAuth({data}))
+            
+        } catch (error) {
+            console.log(error);
+        }
+        // verifyOtp()
+        navigate("/activate");
+        // onNext();
+    };
+    return (
+        <div className="card-wrapper">
+            <Card
+                title="Enter the OTP we've just texted you"
+                emoji={lock}>
+                <div className={styles.cardContentWrapper}>
+                    <div className={styles.inputBox}>
+                        <input
+                            type="text"
+                            className={styles.input}
+                            placeholder="Enter OTP here"
+                            id="otp"
+                            onChange={(e) => {
+                                setOtp(e.target.value);
+                            }}
+                            value={otp}
+                        />
+                    </div>
+                    <Button
+                        text="Next"
+                        onClick={handleClik}
                     />
+                    <p className={styles.termsText}>
+                        By entering your email you’re agreeing to our Terms of
+                        Service and Privacy Policy. Thanks!
+                    </p>
                 </div>
-                <Button
-                    text="Next"
-                    onClick={()=>{
-                        navigate('/activate')
-                    }}
-                />
-                <p className={styles.termsText}>
-                    By entering your email you’re agreeing to our Terms of
-                    Service and Privacy Policy. Thanks!
-                </p>
-            </div>
-        </Card>
-    </div>;
+            </Card>
+        </div>
+    );
 }
+
+

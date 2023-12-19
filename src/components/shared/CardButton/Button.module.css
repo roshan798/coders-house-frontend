@@ -16,7 +16,11 @@
     font-size: 1.2rem;
 }
 
-.btn:hover {
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.btn:hover:not([disabled]) {
     box-shadow: var(--primary-button-bg) -1px -1px 10px 0px;
 }
 

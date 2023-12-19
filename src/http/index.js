@@ -1,10 +1,10 @@
 import axios from 'axios';
 //   TODO
 // put the BASE_URL into .env
-const API_URL = 'http://localhost:8000';
+// const API_URL = 'http://localhost:8000';
 
 const api = axios.create({
-    baseURL: API_URL,
+    baseURL: import.meta.env.VITE_REACT_APP_API_URL,
     withCredentials: true,
     headers: {
         "Content-Type": 'application/json',
@@ -43,7 +43,7 @@ api.interceptors.response.use(
             !originalRequest._isRetry) {
             originalRequest.isRetry = true;
             try {
-                const response = await axios.get(`${API_URL}/api/v1/refresh`,
+                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}/api/v1/refresh`,
                     {
                         withCredentials: true
                     });

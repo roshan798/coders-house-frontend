@@ -1,0 +1,204 @@
+.roomsContainer {
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+}
+
+.headingWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+    /* border: 1px solid red; */
+}
+
+.headingText {
+    position: relative;
+    font-size: 1.3rem;
+    display: inline;
+    line-height: 2rem;
+    white-space: nowrap;
+    /* border: 1px solid green; */
+}
+
+.headingText::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60%;
+    height: 4px;
+    border-radius: 1px;
+    background-color: var(--primary-button-bg);
+}
+
+
+.searchBox {
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background-color: var(--input-bg-color);
+    padding: 0px 1rem 0px 15px;
+    border-radius: 999px;
+    min-width: 150px;
+}
+
+.searchBox input {
+    height: 1.8rem;
+    font-size: 1.2rem;
+    margin: auto;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: var(--secondary-text-color);
+    max-width: 300px;
+    width: 100%;
+    margin-right: 2rem;
+}
+
+.searchBox label {
+    display: flex;
+    align-items: center;
+}
+
+.searchIcon,
+.startRoomBtn img {
+    height: 25px;
+    width: 25px;
+    margin-top: 6px;
+}
+
+.startRoomBtn img {
+    margin-top: 0;
+    margin-bottom: 2px;
+}
+
+.startRoomBtn {
+    background-color: var(--success);
+    height: 2.5rem;
+    padding: 0px 1.2rem;
+    white-space: nowrap;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: none;
+    gap: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+
+}
+
+.startRoomBtn:hover {
+    background-color: #19660f;
+}
+
+
+/*card styles starts from here*/
+.roomsCardsWrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    /* border: 1px solid red; */
+    margin-top: 2rem;
+}
+
+.card {
+    padding: 1rem 1.5rem;
+    background: var(--secondary-bg-color);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    max-width: 500px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+}
+
+.card img {
+    object-fit: contain;
+}
+
+.cardLeft {
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.right div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.right span {
+    font-size: 0.9rem;
+    margin-top: 3px;
+}
+
+.right img {
+    width: 16px;
+}
+
+.title {
+    width: 100%;
+    font-size: 1.3rem;
+
+}
+
+.detailsContainer {
+    display: flex;
+    width: 100%;
+    gap: 1.5rem;
+}
+
+.avatarContainer {
+    position: relative;
+    width: 80px;
+    height: 80px;
+
+}
+
+.avatarContainer img {
+    aspect-ratio: 1/1;
+    width: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    border: 2px solid;
+}
+
+.avatarContainer img:nth-child(1) {
+    border-color: var(--success);
+}
+
+.avatarContainer img:nth-child(2) {
+    border-color: var(--primary-button-bg);
+    top: 22px;
+    left: 22px;
+}
+
+.names {
+    display: flex;
+    gap: 5px;
+    columns: #d8d8d8;
+}

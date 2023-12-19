@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap');
+
 :root {
   --primary-bg-color: #121212;
   --secondary-bg-color: #1d1d1dd2;
@@ -10,12 +11,14 @@
   --success: #20BD5F;
 
 }
-#root{
+
+#root {
   width: 100vw;
   overflow-x: hidden;
   height: 100vh;
   /* overflow-y: scroll; */
 }
+
 html {
   box-sizing: border-box;
   font-size: 16px;
@@ -66,4 +69,12 @@ img {
   margin: auto;
   margin-top: 10vh;
   /* position: relative; */
+}
+
+.hidden {
+  display: none;
+}
+
+.transition {
+  transition: all 200ms ease-in-out;
 }

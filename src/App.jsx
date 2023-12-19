@@ -8,19 +8,21 @@ import Activate from "./pages/Activate/Activate.jsx";
 // import Loader from "./components/shared/Loader/Loader.jsx"; // Import your Loader component
 import { useSelector } from "react-redux";
 import { useLaodingWithRefresh } from "./hooks/useLoadingWithRefresh.js";
-const Loader = () => {
-    return <p style={{textAlign:"center",}}>Loading...</p>;
-};
+import Loader from "./components/shared/Loader/Loader.jsx"
+// const Loader = () => {
+//     return <p style={{textAlign:"center",}}>Loading...</p>;
+// };
 function App() {
     const { isAuth, user } = useSelector((state) => {
         return state.authSlice;
     });
     const {Loading } = useLaodingWithRefresh();
     if (Loading) {
-        return <Loader />;
+        return <Loader message={"Loading, please wait..."}/>;
     }
     return (
         <>
+            
             <Navigation />
             <Routes>
                 <Route
@@ -68,6 +70,8 @@ function App() {
                         )
                     }
                 />
+                
+                {/* <Route path="/loader" element={<Loader message={"Loading, Please wait..."}/>}/> */}
             </Routes>
         </>
     );

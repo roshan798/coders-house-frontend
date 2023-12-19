@@ -11,10 +11,10 @@ export default function Phone({ onNext }) {
     const dispath = useDispatch();
     const [number, setNumber] = useState("");
     async function submitHandler() {
-        console.log("clicked",number);
+        // console.log("clicked",number);
         const response = await sendOtp({ phone: number });
-        console.log(response);
-        console.log(response.data.otp);
+        // console.log(response);
+        // console.log(response.data.otp);
         const { hash, phone } = response.data;
         dispath(setOtp({ phone, hash }));
         console.log(phone, hash);
@@ -47,6 +47,7 @@ export default function Phone({ onNext }) {
             <Button
                 text="Next"
                 onClick={submitHandler}
+                disabled={number.length<10}
             />
             <p className={styles.termsText}>
                 By entering your phone number you’re agreeing to our Terms of

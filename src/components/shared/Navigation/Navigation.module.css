@@ -1,8 +1,6 @@
 nav {
-    /* border: 1px solid red; */
     width: 100vw;
     height: 70px;
-
 }
 
 .wrapper {
@@ -10,12 +8,10 @@ nav {
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    /* border: 1px solid blue; */
     padding: 0 1.5rem;
 }
 
 .logoWrapper {
-    /* border: 1px solid green; */
     font-size: 1.5rem;
     display: flex;
     align-items: center;
@@ -24,12 +20,10 @@ nav {
 }
 
 .emoji {
-    aspect-ratio: 2/3;
-    height: 45px;
+    height: 40px;
 }
 
 .profileContainer {
-    /* border: 1px solid green; */
     display: flex;
     align-items: center;
     gap: 10px;
@@ -40,4 +34,35 @@ nav {
     aspect-ratio: 1/1;
     height: 40px;
     border-radius: 999px;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    position: relative;
+}
+
+.menu {
+    position: absolute;
+    top: 45px;
+    right: 20px;
+    /* background: #ffffff; */
+    border-radius: 6px;
+    box-shadow: #0077ff 1px 1px 5px 1px;
+    overflow: hidden;
+    width: max-content;
+}
+
+.menu button {
+    background-color: #0077ff;
+    background-color: ff0;
+}
+
+.logoutBtn {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
 }

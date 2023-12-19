@@ -1,12 +1,52 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import logo from "../../../assets/Images/Emoji.png";
 import styles from "./Navigation.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuth } from "../../../store/authSlice.js";
 import { logout } from "../../../http";
+import { useRef } from "react";
+
+const ProfileSection = ({ logoutUser, user }) => {
+    const modalRef = useRef();
+    const toggleModal = () => {
+        console.log(modalRef);
+        modalRef.current.classList.toggle("hidden");
+    };
+    return (
+        <>
+            <div className={styles.right}>
+                <div className={styles.profileContainer}>
+                    <div className={styles.right}>
+                        <span onClick={toggleModal}>{user.name}</span>
+                        <img
+                            src={`${import.meta.env.VITE_REACT_APP_API_URL}${
+                                user.avatar
+                            }`}
+                            alt="user-avatar"
+                            className={styles.avatar}
+                            onClick={toggleModal}
+                        />
+                        <ul
+                            className={`${styles.menu} hidden`}
+                            ref={modalRef}>
+                            <li>
+                                <button
+                                    className={styles.logoutBtn}
+                                    onClick={logoutUser}>
+                                    Log out
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};
 export default function Navigation() {
     const dispatch = useDispatch();
-    const { user } = useSelector((state) => state.authSlice);
+    const { user, isAuth } = useSelector((state) => state.authSlice);
     // console.log("inside Navigation.jsx");
     // console.log(user);
     const logoutUser = async () => {
@@ -14,7 +54,7 @@ export default function Navigation() {
             const { data } = await logout();
             // console.log("inside logout");
             // console.log(data);
-            dispatch(setAuth({data:data}));
+            dispatch(setAuth({ data: data }));
         } catch (error) {
             console.log(error);
         }
@@ -33,27 +73,12 @@ export default function Navigation() {
                     />
                     <span>Coders House</span>
                 </Link>
-                <div className={styles.right}>
-                    <div className={styles.profileContainer}>
-                        {user && (
-                            <>
-                                <button
-                                    className={styles.logoutButton}
-                                    onClick={logoutUser}>
-                                    Log out
-                                </button>
-                                <span>{user.name}</span>
-                                <img
-                                    src={`${
-                                        import.meta.env.VITE_REACT_APP_API_URL
-                                    }${user.avatar}`}
-                                    alt="user-avatar"
-                                    className={styles.avatar}
-                                />
-                            </>
-                        )}
-                    </div>
-                </div>
+                {isAuth === true && user != null && (
+                    <ProfileSection
+                        logoutUser={logoutUser}
+                        user={user}
+                    />
+                )}
             </div>
         </nav>
     );

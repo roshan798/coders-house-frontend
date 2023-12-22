@@ -2,70 +2,20 @@
 import styles from "./Rooms.module.css";
 import searchIcon from "../../assets/Images/search.png";
 import peopleVoiceIcon from "../../assets/Images/peopleVoice.png";
-import defaultAvatar from "../../assets/Images/avatar.jpeg";
 import RoomCard from "../../components/RoomCard/RoomCard";
 import AddRoomModal from "../../components/AddRoomModal/AddRoomModal";
-import { useState } from "react";
-/*
-TODO 
-
-Rooms page as per the design 
-style logout button
-
-*/
-const roomsArray = [
-    {
-        title: "Which framework is best for frontend?",
-        speakers: [{ name: "virat Kohli", avatar: defaultAvatar }],
-    },
-    {
-        title: "Which framework is best for frontend?",
-        speakers: [
-            { name: "virat Kohli", avatar: defaultAvatar },
-            { name: "Anushka Sharma", avatar: defaultAvatar },
-            { name: "virat Kohli", avatar: defaultAvatar },
-            { name: "Anushka Sharma", avatar: defaultAvatar },
-        ],
-    },
-    // {
-    //     title: "Which framework is best for frontend?",
-    //     speakers: [
-    //         { name: "virat Kohli", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //         { name: "virat Kohli", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //     ],
-    // },
-    // {
-    //     title: "Which framework is best for frontend?",
-    //     speakers: [
-    //         { name: "virat Kohli", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //     ],
-    // },
-    // {
-    //     title: "Which framework is best for frontend?",
-    //     speakers: [
-    //         { name: "virat Kohli", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //         { name: "virat Kohli", avatar: defaultAvatar },
-    //         { name: "Anushka Sharma", avatar: defaultAvatar },
-    //     ],
-    // },
-];
-
+import { getAllRooms } from "../../http/index.js";
+import { useEffect, useState } from "react";
 export default function Rooms() {
     const [showModal, setShowModal] = useState(false);
+    const [rooms, setRooms] = useState([]);
+    useEffect(() => {
+        const fetchRooms = async () => {
+            const { data } = await getAllRooms();
+            setRooms(data.allRooms);
+        };
+        fetchRooms();
+    }, []);
     const toggleModal = () => {
         setShowModal((state) => !state);
     };
@@ -102,11 +52,11 @@ export default function Rooms() {
                     </div>
                 </div>
                 <div className={styles.roomsCardsWrapper}>
-                    {roomsArray &&
-                        roomsArray.map((room, index) => {
+                    {rooms.length > 0 &&
+                        rooms.map((room, index) => {
                             return (
                                 <RoomCard
-                                    title={room.title}
+                                    title={room.topic}
                                     speakers={room.speakers}
                                     key={index}
                                 />

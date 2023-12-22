@@ -12,12 +12,16 @@ export default function RoomCard({ title, speakers }) {
                     <div className={styles.detailsContainer}>
                         <div className={styles.avatarContainer}>
                             <img
-                                src={speakers[0].avatar}
+                                src={`${
+                                    import.meta.env.VITE_REACT_APP_API_URL
+                                }${speakers[0].avatar}`}
                                 alt=""
                             />
                             {speakers.length >= 2 && (
                                 <img
-                                    src={speakers[1].avatar}
+                                    src={`${
+                                        import.meta.env.VITE_REACT_APP_API_URL
+                                    }${speakers[0].avatar}`}
                                     alt=""
                                 />
                             )}

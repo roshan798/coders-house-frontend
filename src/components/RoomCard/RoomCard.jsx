@@ -2,26 +2,27 @@
 import styles from "./RoomCard.module.css";
 import chatIcon from "../../assets/Images/chatIcon.png";
 import peopleVoiceIcon from "../../assets/Images/peopleVoice.png";
-
-export default function RoomCard({ title, speakers }) {
+import { useNavigate } from "react-router-dom";
+export default function RoomCard({ roomId, title, speakers }) {
+    const navigate = useNavigate();
     return (
         <>
-            <div className={styles.card}>
+            <div
+                className={styles.card}
+                onClick={() => {
+                    navigate(`/room/${roomId}`);
+                }}>
                 <div className={styles.cardLeft}>
                     <p className={styles.title}>{title}</p>
                     <div className={styles.detailsContainer}>
                         <div className={styles.avatarContainer}>
                             <img
-                                src={`${
-                                    import.meta.env.VITE_REACT_APP_API_URL
-                                }${speakers[0].avatar}`}
+                                src={speakers[0].avatar}
                                 alt=""
                             />
                             {speakers.length >= 2 && (
                                 <img
-                                    src={`${
-                                        import.meta.env.VITE_REACT_APP_API_URL
-                                    }${speakers[0].avatar}`}
+                                    src={speakers[1].avatar}
                                     alt=""
                                 />
                             )}

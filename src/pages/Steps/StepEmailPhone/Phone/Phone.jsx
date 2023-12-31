@@ -14,10 +14,10 @@ export default function Phone({ onNext }) {
         // console.log("clicked",number);
         const response = await sendOtp({ phone: number });
         // console.log(response);
-        // console.log(response.data.otp);
+        console.log(response.data.otp);
         const { hash, phone } = response.data;
         dispath(setOtp({ phone, hash }));
-        console.log(phone, hash);
+        // console.log(phone, hash);
         onNext();
     }
     function onChangehandler(e) {

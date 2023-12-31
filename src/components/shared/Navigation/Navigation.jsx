@@ -10,7 +10,6 @@ import { useRef } from "react";
 const ProfileSection = ({ logoutUser, user }) => {
     const modalRef = useRef();
     const toggleModal = () => {
-        console.log(modalRef);
         modalRef.current.classList.toggle("hidden");
     };
     return (
@@ -20,9 +19,7 @@ const ProfileSection = ({ logoutUser, user }) => {
                     <div className={styles.right}>
                         <span onClick={toggleModal}>{user.name}</span>
                         <img
-                            src={`${import.meta.env.VITE_REACT_APP_API_URL}${
-                                user.avatar
-                            }`}
+                            src={user.avatar}
                             alt="user-avatar"
                             className={styles.avatar}
                             onClick={toggleModal}

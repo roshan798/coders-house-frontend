@@ -56,6 +56,7 @@ export default function Rooms() {
                         rooms.map((room, index) => {
                             return (
                                 <RoomCard
+                                    roomId={room.id}
                                     title={room.topic}
                                     speakers={room.speakers}
                                     key={index}

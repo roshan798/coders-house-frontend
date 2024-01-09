@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
-import styles from "./stepAvatar.module.css";
+import styles from "./StepAvatar.module.css";
 import Button from "../../../components/shared/CardButton/Button";
 import Card from "../../../components/shared/Card/Card";
 import monkeyEmogi from "../../../assets/Images/monkey.png";
@@ -17,7 +17,6 @@ export default function StepAvatar() {
     });
 
     const [image, setImage] = useState(avatar);
-    // console.log("avatar page");
 
     const captureImage = (e) => {
         const file = e.target.files[0];
@@ -31,25 +30,22 @@ export default function StepAvatar() {
     const submit = async () => {
         setLoading(true);
         try {
-            console.log(avatar);
             const resp = await activate({ name, avatar });
             if (resp.data.auth) {
                 const data = { ...resp.data };
-                // console.log("inside avatar", data);
                 dispatch(setAuth({ data: data }));
             }
             // console.log(data);
         } catch (error) {
             console.log(error);
-        }
-        finally{
+        } finally {
             setLoading(false);
         }
     };
     return (
         <>
             {loading ? (
-                <Loader message={"Activaion in progress..."}/>
+                <Loader message={"Activaion in progress..."} />
             ) : (
                 <div className="card-wrapper">
                     <Card

@@ -14,6 +14,7 @@ const api = axios.create({
 
 // List of all the endpoints
 export const sendOtp = (data) => {
+
     return api.post('/api/v1/send-otp', data);
 }
 export const verifyOtp = (data) => {
@@ -44,7 +45,7 @@ api.interceptors.response.use(
         return config
     },
     async (error) => {
-        console.log("interceptor called");
+        console.log("interceptor called", `${import.meta.env.VITE_REACT_APP_API_URL}/api/v1/refresh`);
         const originalRequest = error.config;
 
         if (error.response.status === 401 &&
@@ -52,6 +53,7 @@ api.interceptors.response.use(
             !originalRequest._isRetry) {
             originalRequest.isRetry = true;
             try {
+                // eslint-disable-next-line no-unused-vars
                 const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}/api/v1/refresh`,
                     {
                         withCredentials: true

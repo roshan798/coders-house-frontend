@@ -19,7 +19,7 @@ export default function AddRoomModal({ toggleModal }) {
                 topic,
                 roomType,
             });
-            console.log(data);
+            // console.log(data);
             navigate(`/room/${data.id}`);
         } catch (error) {
             console.log(error);

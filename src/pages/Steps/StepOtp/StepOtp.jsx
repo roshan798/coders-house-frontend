@@ -1,27 +1,30 @@
 import styles from "./StepOtp.module.css";
 import lock from "../../../assets/Images/lock.png";
-import Button from "../../../components/shared/CardButton/Button";
-import Card from "../../../components/shared/Card/Card";
+import Button from "../../../components/shared/CardButton/Button.jsx";
+import Card from "../../../components/shared/Card/Card.jsx";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { verifyOtp } from "../../../http/index.js";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { setAuth } from "../../../store/authSlice.js";
 
 export default function StepOtp() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [otp, setOtp] = useState("");
-    const {phone,hash} = useSelector((state)=>{
+    const { sender, hash, type } = useSelector((state) => {
         return state.authSlice.otp;
     });
     const handleClik = async () => {
         try {
-            const {data} = await verifyOtp({ otp, phone, hash });
-            
-            dispatch(setAuth({data}))
-            
+            const { data } = await verifyOtp({
+                otp,
+                sender,
+                hash,
+                type,
+            });
+
+            dispatch(setAuth({ data }));
         } catch (error) {
             console.log(error);
         }
@@ -60,5 +63,3 @@ export default function StepOtp() {
         </div>
     );
 }
-
-

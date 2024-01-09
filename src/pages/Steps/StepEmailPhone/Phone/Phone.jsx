@@ -1,23 +1,31 @@
+/* eslint-disable react/prop-types */
 import Button from "../../../../components/shared/CardButton/Button";
 import styles from "./Phone.module.css";
 import flag from "../../../../assets/Images/flag.png";
 import { sendOtp } from "../../../../http";
 import { useState } from "react";
-
 import { useDispatch } from "react-redux";
-import { setOtp } from "../../../../store/authSlice";
+import { setOtp } from "../../../../store/authSlice.js";
 
 export default function Phone({ onNext }) {
     const dispath = useDispatch();
     const [number, setNumber] = useState("");
+    const [loading, setLoading] = useState(false);
     async function submitHandler() {
-        // console.log("clicked",number);
-        const response = await sendOtp({ phone: number });
-        // console.log(response);
+        setLoading(true);
+        const response = await sendOtp({
+            type: "phone",
+            sender: number,
+        });
         console.log(response.data.otp);
-        const { hash, phone } = response.data;
-        dispath(setOtp({ phone, hash }));
-        // console.log(phone, hash);
+        const { hash, sender } = response.data;
+        dispath(
+            setOtp({
+                sender,
+                hash,
+            })
+        );
+        setLoading(false);
         onNext();
     }
     function onChangehandler(e) {
@@ -47,7 +55,8 @@ export default function Phone({ onNext }) {
             <Button
                 text="Next"
                 onClick={submitHandler}
-                disabled={number.length<10}
+                disabled={number.length < 10}
+                loading={loading}
             />
             <p className={styles.termsText}>
                 By entering your phone number you’re agreeing to our Terms of

@@ -20,6 +20,7 @@ button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
 .btn:hover:not([disabled]) {
     box-shadow: var(--primary-button-bg) -1px -1px 10px 0px;
 }
@@ -37,3 +38,53 @@ button:disabled {
         transform: translateX(0px);
     }
 }
+
+/* 
+*/
+.loader {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    position: relative;
+    animation: rotate 1s linear infinite
+}
+
+.loader::before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    border: 4px solid #FFF;
+    animation: prixClipFix 5s linear infinite;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes prixClipFix {
+    0% {
+        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)
+    }
+
+    25% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0)
+    }
+
+    50% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
+    }
+
+    75% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%)
+    }
+
+    100% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0)
+    }
+}
+
+/*  */

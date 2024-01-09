@@ -1,12 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    // value: 0,
     isAuth: false,
     user: null,
     otp: {
-        phone: "",
-        hash: "",
+
     }
 }
 
@@ -15,13 +13,9 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         setAuth: (state, action) => {
-            // console.log("payload",action.payload.data);
 
             const { user } = action.payload.data;
             state.user = user;
-            //temporary
-            // state.user.activated = false;
-            //
             if (user === null) {
                 state.isAuth = false
             }
@@ -31,10 +25,9 @@ export const authSlice = createSlice({
 
         },
         setOtp: (state, action) => {
-            const { phone, hash } = action.payload;
-            state.otp.phone = phone;
+            const { hash, sender } = action.payload;
+            state.otp.sender = sender;
             state.otp.hash = hash;
-
         },
     },
 })

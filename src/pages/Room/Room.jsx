@@ -2,6 +2,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useWebRTC } from "../../hooks/useWebRTC";
 import { useSelector } from "react-redux";
 import ArrowForward from "../../assets/Images/Arrow forward.png";
+import muteIcon from "../../assets/Images/mute.png";
+import unmuteIcon from "../../assets/Images/unmute.png";
 import styles from "./Room.module.css";
 import { useEffect, useState } from "react";
 import { getRoom } from "../../http/index.js";
@@ -16,15 +18,15 @@ export default function Room() {
         navigate("/rooms");
     };
 
-    const handleMuteClick = (clientId,clientMute) => {
-        console.log(clientMute,isMute);
+    const handleMuteClick = (clientId, clientMute) => {
+        console.log("unmute", clientMute, isMute);
         if (clientId != user.id) return;
         setMute((isMuted) => !isMuted);
     };
 
     useEffect(() => {
         handleMute(isMute, user.id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isMute]);
 
     useEffect(() => {
@@ -40,7 +42,6 @@ export default function Room() {
                 <button
                     className={styles.backBtn}
                     onClick={handleManualLeave}>
-                    {/*add Arrow png here*/}
                     <img
                         src={ArrowForward}
                         alt="back"
@@ -73,36 +74,55 @@ export default function Room() {
                                   <div
                                       key={client.id}
                                       className={styles.clientWrapper}>
-                                      <img
-                                          src={client.avatar}
-                                          alt={`${client.name} avatar`}
-                                          className={styles.avatar}
-                                      />
+                                      <div className={styles.avatarWrapper}>
+                                          <img
+                                              src={client.avatar}
+                                              alt={`${client.name} avatar`}
+                                              className={styles.avatar}
+                                          />
+                                          {client.muted ? (
+                                              <button
+                                                  className={
+                                                      styles.muteUnmuteBtn
+                                                  }
+                                                  onClick={() => {
+                                                      handleMuteClick(
+                                                          client.id,
+                                                          client.muted
+                                                      );
+                                                  }}>
+                                                  {/*place the mute and unmute here */}
+                                                  <img
+                                                      src={muteIcon}
+                                                      alt=""
+                                                  />
+                                                  {/* Unmute */}
+                                              </button>
+                                          ) : (
+                                              <button
+                                                  className={
+                                                      styles.muteUnmuteBtn
+                                                  }
+                                                  onClick={() => {
+                                                      handleMuteClick(
+                                                          client.id,
+                                                          client.muted
+                                                      );
+                                                  }}>
+                                                  <img
+                                                      src={unmuteIcon}
+                                                      alt=""
+                                                  />
+                                                  {/* Mute */}
+                                              </button>
+                                          )}
+                                      </div>
                                       <audio
                                           ref={(instance) => {
                                               provideRef(instance, client.id);
                                           }}
-                                          controls
                                       />
-                                      {client.muted ? (
-                                          <button
-                                              className={styles.btn}
-                                              onClick={() => {
-                                                  handleMuteClick(client.id,client.muted);
-                                              }}>
-                                              {/*place the mute and unmute here */}
-                                              Unmute
-                                          </button>
-                                      ) : (
-                                          <button
-                                              className={styles.btn}
-                                              onClick={() => {
-                                                  handleMuteClick(client.id,client.muted);
-                                              }}>
-                                              {/*place the mute and unmute here */}
-                                              Mute
-                                          </button>
-                                      )}
+
                                       <h4>{client.name}</h4>
                                   </div>
                               );

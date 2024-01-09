@@ -115,3 +115,22 @@
 .clientWrapper h4 {
     font-weight: 500;
 }
+
+.avatarWrapper {
+    position: relative;
+    /* border: 1px solid rgb(115, 255, 0); */
+}
+
+.muteUnmuteBtn {
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    bottom: -5px;
+    right: -8px;
+    background-color: transparent;
+    filter: drop-shadow(0px 0px 5px #0f0f0f);
+}
+
+.muteUnmuteBtn img {
+    width: 28px;
+}

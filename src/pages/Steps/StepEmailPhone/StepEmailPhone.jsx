@@ -8,7 +8,6 @@ import Email from "./Email/Email.jsx";
 import Phone from "./Phone/Phone.jsx";
 import { useState } from "react";
 export default function stepEmailPhone({ onNext }) {
-    // console.log("render");
     const component = {
         phone: {
             element: Phone,

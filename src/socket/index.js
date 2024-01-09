@@ -1,3 +1,4 @@
+
 import { io } from "socket.io-client";
 const socketInit = () => {
     const options = {
@@ -6,6 +7,6 @@ const socketInit = () => {
         timeout: 10000,
         transport: ['websocket']
     }
-    return io('http://localhost:8000', options);
+    return io(import.meta.env.VITE_REACT_APP_API_URL, options);
 }
 export default socketInit;

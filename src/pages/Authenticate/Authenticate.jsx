@@ -1,10 +1,9 @@
-import stepEmailPhone from "../Steps/stepEmailPhone/stepEmailPhone";
-import stepOtp from "../Steps/stepOtp/stepOtp";
+import StepEmailPhone from "../Steps/StepEmailPhone/StepEmailPhone.jsx";
+import stepOtp from "../Steps/StepOtp/StepOtp.jsx";
 import { useState } from "react";
-import styles from "./Authenticate.module.css";
 export default function Authenticate() {
     const steps = {
-        1: stepEmailPhone,
+        1: StepEmailPhone,
         2: stepOtp,
     };
     const [step, setStep] = useState(1);
@@ -16,7 +15,6 @@ export default function Authenticate() {
     return (
         <>
             <Step onNext={nextStep} />
-
         </>
     );
 }

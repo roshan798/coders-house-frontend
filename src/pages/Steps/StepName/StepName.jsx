@@ -1,6 +1,6 @@
 import { useState } from "react";
 import namePageEmogi from "../../../assets/Images/name-page.png";
-import styles from "./stepName.module.css";
+import styles from "./StepName.module.css";
 import Button from "../../../components/shared/CardButton/Button";
 import Card from "../../../components/shared/Card/Card";
 import { useDispatch, useSelector } from "react-redux";

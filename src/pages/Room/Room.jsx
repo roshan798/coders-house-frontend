@@ -1,12 +1,12 @@
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useWebRTC } from "../../hooks/useWebRTC";
 import { useSelector } from "react-redux";
+import { useWebRTC } from "../../hooks/useWebRTC";
+import { getRoom } from "../../http/index.js";
 import ArrowForward from "../../assets/Images/Arrow forward.png";
 import muteIcon from "../../assets/Images/mute.png";
 import unmuteIcon from "../../assets/Images/unmute.png";
 import styles from "./Room.module.css";
-import { useEffect, useState } from "react";
-import { getRoom } from "../../http/index.js";
 export default function Room() {
     const navigate = useNavigate();
     const { roomId } = useParams();
@@ -19,14 +19,14 @@ export default function Room() {
     };
 
     const handleMuteClick = (clientId, clientMute) => {
-        console.log("unmute", clientMute, isMute);
+        // console.log("unmute", clientMute, isMute);
         if (clientId != user.id) return;
         setMute((isMuted) => !isMuted);
     };
 
     useEffect(() => {
         handleMute(isMute, user.id);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        console.log("djobject");
     }, [isMute]);
 
     useEffect(() => {

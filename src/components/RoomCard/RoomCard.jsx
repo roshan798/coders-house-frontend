@@ -2,7 +2,16 @@
 import styles from "./RoomCard.module.css";
 import chatIcon from "../../assets/Images/chatIcon.png";
 import peopleVoiceIcon from "../../assets/Images/peopleVoice.png";
+import kababMenu from "../../assets/Images/kababMenu.png";
 import { useNavigate } from "react-router-dom";
+
+const Menu = () => {
+    return (
+        <>
+            <div className="modal">Menu</div>
+        </>
+    );
+};
 export default function RoomCard({ roomId, title, speakers }) {
     const navigate = useNavigate();
     return (
@@ -42,6 +51,13 @@ export default function RoomCard({ roomId, title, speakers }) {
                     </div>
                 </div>
                 <div className={styles.right}>
+                    <div className={styles.menu}>
+                        <img
+                            src={kababMenu}
+                            alt=""
+                            className={styles.kababMenyIcon}
+                        />
+                    </div>
                     <div>
                         <span>{speakers.length}</span>
                         <img

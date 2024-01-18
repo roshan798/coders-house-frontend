@@ -53,11 +53,19 @@ nav {
     box-shadow: #0077ff 1px 1px 5px 1px;
     overflow: hidden;
     width: max-content;
+    z-index: 999;
+    background-color: #0077ff;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
 }
 
 .menu button {
     background-color: #0077ff;
-    background-color: ff0;
+}
+.menu button:hover {
+    background: #007700;
 }
 
 .logoutBtn {
@@ -65,4 +73,18 @@ nav {
     padding: 0.5rem 1rem;
     border: none;
     cursor: pointer;
+}
+
+.profileWrapper {
+    /* border: 1px solid red; */
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileWrapper img {
+    width: 50px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
 }

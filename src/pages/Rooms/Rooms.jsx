@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
+import { getAllRooms } from "../../http/index.js";
 import styles from "./Rooms.module.css";
 import searchIcon from "../../assets/Images/search.png";
 import peopleVoiceIcon from "../../assets/Images/peopleVoice.png";
 import RoomCard from "../../components/RoomCard/RoomCard";
 import AddRoomModal from "../../components/AddRoomModal/AddRoomModal";
-import { getAllRooms } from "../../http/index.js";
-import { useEffect, useState } from "react";
+
 export default function Rooms() {
     const [showModal, setShowModal] = useState(false);
     const [rooms, setRooms] = useState([]);
@@ -52,7 +53,7 @@ export default function Rooms() {
                     </div>
                 </div>
                 <div className={styles.roomsCardsWrapper}>
-                    {rooms.length > 0 &&
+                    {rooms.length > 0 ? (
                         rooms.map((room, index) => {
                             return (
                                 <RoomCard
@@ -62,7 +63,10 @@ export default function Rooms() {
                                     key={index}
                                 />
                             );
-                        })}
+                        })
+                    ) : (
+                        <div>No rooms found</div>
+                    )}
                 </div>
             </div>
             {showModal && <AddRoomModal toggleModal={toggleModal} />}

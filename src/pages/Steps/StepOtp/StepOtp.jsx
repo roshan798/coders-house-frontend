@@ -14,26 +14,31 @@ export default function StepOtp() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [otp, setOtp] = useState(["", "", "", ""]);
+    const [error, setError] = useState(null);
     const { sender, hash, type } = useSelector((state) => {
         return state.authSlice.otp;
     });
     const handleClik = async () => {
         const OTP = otp.join("");
         try {
-            const { data } = await verifyOtp({
+            const res = await verifyOtp({
                 otp: OTP,
                 sender,
                 hash,
                 type,
             });
-            dispatch(setAuth({ data }));
+            if (res) {
+                console.log("respone =>>", res);
+                const { data } = res;
+                dispatch(setAuth({ data }));
+            }
+            navigate("/activate");
         } catch (error) {
-            console.log(error);
+            const { data } = error.response;
+            console.log("insedie step otp catch", data);
+            setError(data?.message);
         }
         setOtp(["", "", "", ""]);
-        // verifyOtp()
-        navigate("/activate");
-        // onNext();
     };
     return (
         <div className="card-wrapper">
@@ -44,17 +49,10 @@ export default function StepOtp() {
                     <OtpInputs
                         otp={otp}
                         setOtp={setOtp}
+                        error={error}
+                        setError={setError}
                     />
-                    {/* <input
-                            type="text"
-                            className={styles.input}
-                            placeholder="Enter OTP here"
-                            id="otp"
-                            onChange={(e) => {
-                                setOtp(e.target.value);
-                            }}
-                            value={otp}
-                        /> */}
+
                     <Button
                         text="Next"
                         onClick={handleClik}

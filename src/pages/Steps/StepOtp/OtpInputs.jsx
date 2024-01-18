@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useRef, useEffect } from "react";
 import styles from "./OtpInputs.module.css";
-export default function OtpInputs({ otp, setOtp }) {
+export default function OtpInputs({ otp, setOtp, error, setError }) {
     const inputRefs = useRef([]);
 
     useEffect(() => {
@@ -9,6 +9,7 @@ export default function OtpInputs({ otp, setOtp }) {
     }, []);
 
     const handleInputChange = (e, index) => {
+        if (error) setError(null);
         const { value } = e.target;
         if (!isNaN(value) && value !== "") {
             setOtp((prevOtp) => {
@@ -23,7 +24,6 @@ export default function OtpInputs({ otp, setOtp }) {
     };
 
     const handleKeyDown = (e) => {
-        // console.log("handle Key down", e);
         const keyCode = parseInt(e.key);
         if (
             e.key !== "Backspace" &&
@@ -37,7 +37,6 @@ export default function OtpInputs({ otp, setOtp }) {
     };
 
     const handleKeyUp = (e, index) => {
-        // console.log("handle Key Up", e);
         if (e.key === "Backspace" || e.key === "Delete") {
             setOtp((prevValue) => {
                 const newArray = [...prevValue];
@@ -65,23 +64,26 @@ export default function OtpInputs({ otp, setOtp }) {
         setOtp(newInputValue);
     };
     return (
-        <div className={styles.inputWrapper}>
-            {otp.map((value, index) => (
-                <input
-                    key={index}
-                    ref={(el) => (inputRefs.current[index] = el)}
-                    inputMode="numeric"
-                    type="text"
-                    maxLength={1}
-                    value={value}
-                    onChange={(e) => handleInputChange(e, index)}
-                    onKeyUp={(e) => handleKeyUp(e, index)}
-                    onKeyDown={(e) => handleKeyDown(e, index)}
-                    onPaste={(e) => handlePaste(e, index)}
-                    autoComplete="off"
-                    className={styles.input}
-                />
-            ))}
+        <div>
+            <div className={styles.inputWrapper}>
+                {otp.map((value, index) => (
+                    <input
+                        key={index}
+                        ref={(el) => (inputRefs.current[index] = el)}
+                        inputMode="numeric"
+                        type="text"
+                        maxLength={1}
+                        value={value}
+                        onChange={(e) => handleInputChange(e, index)}
+                        onKeyUp={(e) => handleKeyUp(e, index)}
+                        onKeyDown={(e) => handleKeyDown(e, index)}
+                        onPaste={(e) => handlePaste(e, index)}
+                        autoComplete="off"
+                        className={styles.input}
+                    />
+                ))}
+            </div>
+            {/* <span className={styles.error}>{error ? error : ""}</span> */}
         </div>
     );
 }

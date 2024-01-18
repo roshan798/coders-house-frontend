@@ -66,9 +66,6 @@ export function useWebRTC(roomId, user) {
 								let settled = false;
 								const interval = setInterval(() => {
 									if (audioElements.current[remoteUser.id]) {
-										console.log(
-											"this is inside if condition of handle on track on this connections"
-										);
 										audioElements.current[remoteUser.id].srcObject = remoteStream;
 										audioElements.current[remoteUser.id].volume = 0.8;
 										audioElements.current[remoteUser.id].play();

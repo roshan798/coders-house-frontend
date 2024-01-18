@@ -45,13 +45,13 @@ api.interceptors.response.use(
         return config
     },
     async (error) => {
-        console.log("interceptor called", `${import.meta.env.VITE_REACT_APP_API_URL}/api/v1/refresh`);
+        console.log("Error happend bhai", `${import.meta.env.VITE_REACT_APP_API_URL}/api/v1/refresh`);
         const originalRequest = error.config;
-
+        console.log(error);
         if (error.response.status === 401 &&
             originalRequest &&
             !originalRequest._isRetry) {
-            originalRequest.isRetry = true;
+            originalRequest._isRetry = true;
             try {
                 // eslint-disable-next-line no-unused-vars
                 const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_URL}/api/v1/refresh`,
@@ -60,10 +60,10 @@ api.interceptors.response.use(
                     });
                 return api.request(originalRequest);
             } catch (error) {
-                console.log("object", error);
+                console.log("Inteceptor Error", error);
             }
-            throw error;
         }
+        throw error;
 
     })
 

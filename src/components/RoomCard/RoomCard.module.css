@@ -10,6 +10,7 @@
     text-align: left;
     cursor: pointer;
     display: flex;
+    gap: 1rem;
 }
 
 .card img {
@@ -17,7 +18,6 @@
 }
 
 .cardLeft {
-    /* border: 1px solid blue; */
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -26,9 +26,11 @@
 }
 
 .right {
+    margin-left: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .right div {
@@ -88,4 +90,24 @@
     display: flex;
     gap: 5px;
     columns: #d8d8d8;
+}
+
+.titleMenuWrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.menu {
+    padding: 0;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.kababMenyIcon {
+    filter: invert();
+    width: 20px !important;
 }

@@ -10,6 +10,7 @@ import { useRef } from "react";
 const ProfileSection = ({ logoutUser, user }) => {
     const modalRef = useRef();
     const toggleModal = () => {
+        console.log("object");
         modalRef.current.classList.toggle("hidden");
     };
     return (
@@ -28,6 +29,15 @@ const ProfileSection = ({ logoutUser, user }) => {
                             className={`${styles.menu} hidden`}
                             ref={modalRef}>
                             <li>
+                                <div className={styles.profileWrapper}>
+                                    <img
+                                        src={user.avatar}
+                                        alt={user.name}
+                                    />
+                                    <p className="name">{user.name}</p>
+                                </div>
+                            </li>
+                            <li>
                                 <button
                                     className={styles.logoutBtn}
                                     onClick={logoutUser}>
@@ -44,13 +54,9 @@ const ProfileSection = ({ logoutUser, user }) => {
 export default function Navigation() {
     const dispatch = useDispatch();
     const { user, isAuth } = useSelector((state) => state.authSlice);
-    // console.log("inside Navigation.jsx");
-    // console.log(user);
     const logoutUser = async () => {
         try {
             const { data } = await logout();
-            // console.log("inside logout");
-            // console.log(data);
             dispatch(setAuth({ data: data }));
         } catch (error) {
             console.log(error);
